@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección Civil - Dashboard Integrado</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJXP0RG02HtSc5p9CP-H7S0_isGeSbsNM&libraries=geometry,places,visualization"></script>
+</head>
+<body>
+    
+    <header class="app-header">
+        <div class="header-titles" style="display: flex; align-items: center; gap: 15px;">
+            <button id="mobileMenuBtn" class="mobile-btn">☰ Menú</button>
+            <div>
+                <div class="header-title">🚨 CENTRO DE MANDO - PROTECCIÓN CIVIL</div>
+                <div class="header-subtitle">Unidad Operativa Tapachula</div>
+            </div>
+        </div>
+        <div id="clockDisplay" class="header-clock">00:00:00</div>
+    </header>
+
+    <div class="main-container">
+        
+        <aside class="sidebar-left">
+            <div class="control-group">
+                <h3>Emergencias y Despacho</h3>
+                
+                <label for="severityLevel" class="label-sm">Gravedad del Incidente:</label>
+                <select id="severityLevel" class="select-input" style="margin-bottom: 10px;">
+                    <option value="leve">Leve (1 Unidad)</option>
+                    <option value="severo">Severo (Despacho Doble)</option>
+                </select>
+
+                <button id="btnIncendio" class="btn btn-red">🔥 Registrar Incendio</button>
+                <button id="btnAccidente" class="btn btn-orange">🚗 Registrar Accidente</button>
+                <button id="btnMedica" class="btn btn-blue">🚑 Emergencia Médica</button>
+                <button id="btnSimulacion" class="btn btn-purple">🚓 Patrulla de Rutina</button>
+                <button id="btnClearIncidents" class="btn btn-gray">🧹 Limpiar Mapa y Unidades</button>
+            </div>
+
+            <div class="control-group">
+                <h3>Búsqueda y Capas</h3>
+                <input type="text" id="searchBox" class="select-input" placeholder="Buscar colonia o calle..." style="margin-bottom: 10px;">
+                
+                <div class="btn-row">
+                    <button id="btnToggleTraffic" class="btn btn-outline">🚦 Tráfico: ON</button>
+                    <button id="btnToggleHeatmap" class="btn btn-outline">🔥 Calor: OFF</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Gestión de Territorio</h3>
+                <label for="riskLevel" class="label-sm">Nivel de Riesgo (Color):</label>
+                <select id="riskLevel" class="select-input">
+                    <option value="#ef4444">Alto Riesgo / Derrumbe (Rojo)</option>
+                    <option value="#f59e0b">Prevención (Amarillo)</option>
+                    <option value="#3b82f6">Inundación (Azul)</option>
+                </select>
+                
+                <div class="btn-row">
+                    <button id="btnAddPoint" class="btn btn-green">🟢 Trazar Zona</button>
+                    <button id="btnAddRoute" class="btn btn-emerald">🏃‍♂️ Trazar Ruta</button>
+                </div>
+                
+                <div class="btn-row">
+                    <button id="btnDeletePoint" class="btn btn-outline">Deshacer Punto</button>
+                    <button id="btnReset" class="btn btn-outline">Limpiar Trazos</button>
+                </div>
+            </div>
+
+            <div class="branding-left">
+                <img src="logo.jpeg" alt="Logo Universidad" class="uni-logo">
+            </div>
+        </aside>
+
+        <main id="map-container">
+            <div id="google-map"></div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="control-group kpi-grid">
+                <div class="kpi-card mini-kpi">
+                    <p class="kpi-title">Incidentes</p>
+                    <p id="kpiIncidentes" class="kpi-value">0</p>
+                </div>
+                <div class="kpi-card mini-kpi">
+                    <p class="kpi-title">Unidades</p>
+                    <p id="kpiUnidades" class="kpi-value">0</p>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>Monitor de Geometría</h3>
+                <p class="status-text"><span id="selectionStatus">0 Puntos</span></p>
+                <div class="kpi-card">
+                    <p class="kpi-title">Medición Actual</p>
+                    <p id="infoAreaDisplay" class="kpi-value">--</p>
+                </div>
+            </div>
+
+            <div class="control-group flex-grow">
+                <h3>Bitácora de Eventos</h3>
+                <div id="eventLog" class="coord-container log-container">
+                    <p class="empty-text">Sistema en espera...</p>
+                </div>
+            </div>
+
+            <div class="control-group branding-card">
+                <p class="career-title">Ingeniería en Tecnologías de la Información<br>e Innovación Digital</p>
+            </div>
+        </aside>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
